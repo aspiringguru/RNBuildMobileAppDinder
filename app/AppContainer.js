@@ -21,6 +21,18 @@ import {
 /* added in ch 2-7 */
 import SideMenu from './components/sideMenu'
 
+/* added in ch 2-10 */
+import SettingsStore from './stores/settingsStore'
+import SplashScene from './scenes/splashScene'
+/* added in ch 2-10 */
+import theme from './theme/base-theme'
+/*
+*   https://nativebase.io/docs/v0.3.1/customize
+*/
+/* added in ch 2-10 */
+const settings = new SettingsStore()
+
+
 
 /*
 *   constructor args = properties of component
@@ -31,13 +43,17 @@ import SideMenu from './components/sideMenu'
 *
 *   render method taks null args and returns null
 *   "toggled: false" added so methods openDrawer & closeDrawer can set to t/f
+*   ch 2-10  added settings: settings to store
+*
 */
 export default class AppContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       toggled: false,
-      store: {},
+      store: {
+        settings: settings
+      },
       theme: null
     }
   }
@@ -57,9 +73,15 @@ export default class AppContainer extends Component {
   /*
   *   switch statement uses route to decide whith scene to render
   *   for now, have no scenes so return null
+  *   ch2-10 change switch(route) to switch(route.title)
+  *   added case for 'Splash'
+  *   nb ... = spread operator  combines all the properties
   */
   renderScene(route, navigator) {
-    switch(route) {
+    switch(route.title) {
+      case 'Splash': {
+        return <SplashScene {...route.passProps} navigator={navigator}/>
+      }
       default: {
         return null
       }
@@ -82,6 +104,8 @@ export default class AppContainer extends Component {
   * replace temp black screen with theme nominated.
     <View style={{backgroundColor: "#000", height: 1000}}/>
     nb: theme is still null at this point.
+
+    ch2-10 added initialRoute to Navigator
   */
 
   render() {
@@ -101,6 +125,14 @@ export default class AppContainer extends Component {
             ref={(ref) => this._navigator = ref}
             configureScene={this.configureScene.bind(this)}
             renderScene={this.renderScene.bind(this)}
+            initialRoute={{
+              title: "Splash",
+              passProps: {
+                stores: this.state.store,
+                toggleDrawer: this.toggleDrawer.bind(this),
+                theme: this.state.theme
+              }
+            }}
             />
       </Drawer>
 
