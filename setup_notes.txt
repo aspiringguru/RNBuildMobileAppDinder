@@ -7,3 +7,6 @@ mkdir App
 
 
 npm install --save react-native-deprecated-custom-components
+npm install --save firebase
+
+npm install --save mobx mobx-react mobx-firebase-store firebase-nest

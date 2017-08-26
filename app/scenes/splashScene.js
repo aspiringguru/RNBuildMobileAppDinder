@@ -29,7 +29,7 @@ export default class SplashScene extends Component {
   }
 
   /*
-  *
+  *   stores value passed to settings
   *   flex:1   = uses whole screen
   */
   render() {
