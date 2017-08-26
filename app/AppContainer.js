@@ -8,8 +8,13 @@ import {
 
 import {
   Navigator,
- } from 'react-native'
+ } from 'react-native-deprecated-custom-components'
 
+/*
+*   nb: deprecated package, Navigator now imported from
+*   react-native-deprecated-custom-components
+*
+*/
 /*
 *   constructor args = properties of component
 *   passes those properties up to super
@@ -28,7 +33,7 @@ export default class AppContainer extends Component {
       store: {},
       theme: null
     }
-
+  }
   /*
   *   check if drawer is open or not
   *
@@ -76,14 +81,14 @@ export default class AppContainer extends Component {
           onOpen={this.openDrawer.bind(this)}
           openDrawerOffset={0.2}
           >
+          <Navigator
+            ref={(ref) => this._navigator = ref}
+            configureScene={this.configureScene.bind(this)}
+            renderScene={this.renderScene.bind(this)}
+            />
       </Drawer>
-      <Navigator
-        ref={(ref) => this._navigator = ref}
-        configureScene={this.configureScene.bind(this)}
-        renderScene={this.renderScene.bind(this)}
-        />
 
     )
   }
 
-  }
+}/* end export default class AppContainer extends Component */

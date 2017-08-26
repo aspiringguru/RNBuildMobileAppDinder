@@ -1,0 +1,9 @@
+lynda.com > React-Native-Building-Mobile-Apps
+
+npm install --save native-base
+
+mkdir App
+
+
+
+npm install --save react-native-deprecated-custom-components
