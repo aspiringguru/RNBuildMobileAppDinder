@@ -4,17 +4,24 @@ import {
   Drawer,
   View,
  } from 'native-base'
-
+/*
+*
+*
+*/
 
 import {
   Navigator,
  } from 'react-native-deprecated-custom-components'
-
 /*
 *   nb: deprecated package, Navigator now imported from
 *   react-native-deprecated-custom-components
 *   nbb: should look at new navigation toolset.
 */
+
+/* added in ch 2-7 */
+import SideMenu from './components/sideMenu'
+
+
 /*
 *   constructor args = properties of component
 *   passes those properties up to super
@@ -71,12 +78,21 @@ export default class AppContainer extends Component {
   *   binds method to keyword this.
   *   openDrawerOffset 0.2 value chosen for appearance
   */
+  /*
+  * replace temp black screen with theme nominated.
+    <View style={{backgroundColor: "#000", height: 1000}}/>
+    nb: theme is still null at this point.
+  */
+
   render() {
     return (
       <Drawer
           ref={(ref) => this._drawer = ref}
           type="displace"
-          content={<View style={{backgroundColor: "#000", height: 1000}}/>}
+          content={
+            <SideMenu navigator={this._navigator} theme={this.state.theme}/>
+          }
+
           onClose={this.closeDrawer.bind(this)}
           onOpen={this.openDrawer.bind(this)}
           openDrawerOffset={0.2}
