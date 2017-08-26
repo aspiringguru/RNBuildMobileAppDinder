@@ -13,7 +13,7 @@ import {
 /*
 *   nb: deprecated package, Navigator now imported from
 *   react-native-deprecated-custom-components
-*
+*   nbb: should look at new navigation toolset.
 */
 /*
 *   constructor args = properties of component
