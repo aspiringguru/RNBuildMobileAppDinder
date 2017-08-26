@@ -5,6 +5,11 @@ import {
   View,
  } from 'native-base'
 
+
+import {
+  Navigator,
+ } from 'react-native'
+
 /*
 *   constructor args = properties of component
 *   passes those properties up to super
@@ -37,6 +42,24 @@ export default class AppContainer extends Component {
   closeDrawer() {
     this.setState({toggled: false})
   }
+  /*
+  *   switch statement uses route to decide whith scene to render
+  *   for now, have no scenes so return null
+  */
+  renderScene(route, navigator) {
+    switch(route) {
+      default: {
+        return null
+      }
+    }
+  }
+  /*
+  *   configureScene pushes scene in from right.
+  *   https://facebook.github.io/react-native/releases/0.43/docs/navigator.html
+  */
+  configureScene(route, routeStack) {
+    return Navigator.SceneConfigs.PushFromRight
+  }
 
   /*
   *   NB : this.closeDrawer.bind(this)
@@ -54,6 +77,11 @@ export default class AppContainer extends Component {
           openDrawerOffset={0.2}
           >
       </Drawer>
+      <Navigator
+        ref={(ref) => this._navigator = ref}
+        configureScene={this.configureScene.bind(this)}
+        renderScene={this.renderScene.bind(this)}
+        />
 
     )
   }
